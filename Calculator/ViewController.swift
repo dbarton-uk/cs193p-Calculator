@@ -25,7 +25,14 @@ class ViewController: UIViewController {
             userIsInTheMiddleOfTyping = true
         }
     }
-
+   
+    @IBAction func touchPoint(_ sender: UIButton) {
+        
+        if !display.text!.contains(".") {
+            touchDigit(sender)
+        }
+    }
+    
     var displayValue: Double {
         get {
             return Double(display.text!)!
