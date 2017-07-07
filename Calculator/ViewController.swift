@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var userIsInTheMiddleOfTyping = false
     
     @IBAction func touchDigit(_ sender: UIButton) {
+        
         let digit = sender.currentTitle!
         
         if userIsInTheMiddleOfTyping {
@@ -27,6 +28,11 @@ class ViewController: UIViewController {
     }
    
     @IBAction func touchPoint(_ sender: UIButton) {
+        
+        if (!userIsInTheMiddleOfTyping) {
+            display.text = "0"
+            userIsInTheMiddleOfTyping = true
+        }
         
         if !display.text!.contains(".") {
             touchDigit(sender)
