@@ -57,6 +57,13 @@ class ViewController: UIViewController {
             brain.setOperand(displayValue)
             userIsInTheMiddleOfTyping = false
         }
+        
+        brain.performOperation(sender.currentTitle!)
+        
+        let postfix = brain.resultIsPending ? " ..." : " ="
+        
+        print(brain.description + postfix);
+        
     }
 }
 
