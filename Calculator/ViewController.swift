@@ -60,9 +60,7 @@ class ViewController: UIViewController {
         
         brain.performOperation(sender.currentTitle!)
         
-        let postfix = brain.resultIsPending ? " ..." : " ="
-        
-        print(brain.description + postfix);
+        print(brain.sequence);
         
     }
 }

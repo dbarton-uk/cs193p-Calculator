@@ -118,5 +118,12 @@ struct CalculatorBrain {
             return accumulator
         }
     }
+    
+    var sequence: String {
+        get {
+            let postfix = resultIsPending ? " ..." : " ="
+            return description + postfix
+        }
+    }
    
 }
