@@ -109,23 +109,15 @@ struct CalculatorBrain {
                     
                 }
             case .equals:
-                performPendingDescription()
                 performPendingBinaryOperation()
-                
             }
-        }
-    }
-
-    private mutating func performPendingDescription() {
-        
-        if pendingBinaryOperation != nil {
-            description = pendingBinaryDescription + (description == nil ? "" : description!)
         }
     }
     
     private mutating func performPendingBinaryOperation() {
         if pendingBinaryOperation != nil && accumulator != nil {
             accumulator = pendingBinaryOperation!.perform(with: accumulator!)
+            description = pendingBinaryDescription + (description == nil ? "" : description!)
             pendingBinaryOperation = nil
         }
     }
