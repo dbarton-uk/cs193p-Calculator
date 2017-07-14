@@ -87,7 +87,7 @@ struct CalculatorBrain {
     private mutating func performPendingDescription() {
         
         if pendingBinaryOperation != nil {
-            description = pendingBinaryDescription + description!
+            description = pendingBinaryDescription + (description == nil ? "" : description!)
         }
     }
     
