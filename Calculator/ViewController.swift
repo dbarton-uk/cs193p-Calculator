@@ -10,10 +10,21 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    private var brain = CalculatorBrain()
+    
+    private var userIsInTheMiddleOfTyping = false
+    
+    private var displayValue: Double {
+        get {
+            return Double(display.text!)!
+        }
+        set {
+            display.text = String(newValue)
+        }
+    }
+    
     @IBOutlet weak var display: UILabel!
     @IBOutlet weak var sequence: UILabel!
-    
-    var userIsInTheMiddleOfTyping = false
     
     @IBAction func touchDigit(_ sender: UIButton) {
         
@@ -40,17 +51,6 @@ class ViewController: UIViewController {
         }
 
     }
-    
-    var displayValue: Double {
-        get {
-            return Double(display.text!)!
-        }
-        set {
-            display.text = String(newValue)
-        }
-    }
-    
-    private var brain = CalculatorBrain()
     
     @IBAction func performOperation(_ sender: UIButton) {
         
