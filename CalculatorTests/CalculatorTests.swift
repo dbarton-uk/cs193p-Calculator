@@ -262,4 +262,19 @@ class CalculatorTests: XCTestCase {
         
     }
     
+    func testHint7() {
+        
+        controller.touchDigit(sixButton)
+        controller.performOperation(multiplyButton)
+        controller.touchDigit(fiveButton)
+        controller.performOperation(multiplyButton)
+        controller.touchDigit(fourButton)
+        controller.performOperation(multiplyButton)
+        controller.touchDigit(threeButton)
+        controller.performOperation(equalsButton)
+        
+        assertExpectedDisplayValue(of: "6×5×4×3=", asDisplayValue: "360.0", asSequenceValue: "6.0 × 5.0 × 4.0 × 3.0 =")
+        
+    }
+    
 }
