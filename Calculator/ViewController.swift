@@ -52,6 +52,15 @@ class ViewController: UIViewController {
 
     }
     
+    @IBAction func touchClear(_ sender: UIButton) {
+        
+        brain = CalculatorBrain()
+        
+        userIsInTheMiddleOfTyping = false
+        display.text = "0"
+        sequence.text = " "
+    }
+    
     @IBAction func performOperation(_ sender: UIButton) {
         
         if userIsInTheMiddleOfTyping {
@@ -68,7 +77,6 @@ class ViewController: UIViewController {
         }
 
         sequence.text = brain.sequence
-        
     }
 }
 

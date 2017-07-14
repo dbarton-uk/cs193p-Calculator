@@ -34,6 +34,8 @@ class CalculatorTests: XCTestCase {
     var multiplyButton: UIButton!
     var equalsButton: UIButton!
     
+    var clearButton: UIButton!
+    
     
     override func setUp() {
         super.setUp()
@@ -47,47 +49,49 @@ class CalculatorTests: XCTestCase {
         oneButton = UIButton()
         oneButton.setTitle("1", for: .normal)
         
-        twoButton = UIButton();
+        twoButton = UIButton()
         twoButton.setTitle("2", for: .normal)
         
-        threeButton = UIButton();
+        threeButton = UIButton()
         threeButton.setTitle("3", for: .normal)
         
-        fourButton = UIButton();
+        fourButton = UIButton()
         fourButton.setTitle("4", for: .normal)
         
-        fiveButton = UIButton();
+        fiveButton = UIButton()
         fiveButton.setTitle("5", for: .normal)
         
-        sixButton = UIButton();
+        sixButton = UIButton()
         sixButton.setTitle("6", for: .normal)
         
-        sevenButton = UIButton();
+        sevenButton = UIButton()
         sevenButton.setTitle("7", for: .normal)
         
-        eightButton = UIButton();
+        eightButton = UIButton()
         eightButton.setTitle("8", for: .normal)
         
-        nineButton = UIButton();
+        nineButton = UIButton()
         nineButton.setTitle("9", for: .normal)
         
-        pointButton = UIButton();
+        pointButton = UIButton()
         pointButton.setTitle(".", for: .normal)
         
-        piButton = UIButton();
+        piButton = UIButton()
         piButton.setTitle("π", for: .normal)
         
-        rootButton = UIButton();
+        rootButton = UIButton()
         rootButton.setTitle("√", for: .normal)
         
-        plusButton = UIButton();
+        plusButton = UIButton()
         plusButton.setTitle("+", for: .normal)
         
-        multiplyButton = UIButton();
+        multiplyButton = UIButton()
         multiplyButton.setTitle("×", for: .normal)
         
-        equalsButton = UIButton();
+        equalsButton = UIButton()
         equalsButton.setTitle("=", for: .normal)
+        
+        clearButton = UIButton()
         
     }
     
@@ -249,6 +253,13 @@ class CalculatorTests: XCTestCase {
         controller.performOperation(equalsButton)
         
         assertExpectedDisplayValue(of: "4×π=", asDisplayValue: "12.5663706143592", asSequenceValue: "4.0 × π =")
+    }
+    
+    func test8() {
+        
+        controller.touchClear(clearButton)
+        assertExpectedDisplayValue(of: "C", asDisplayValue: "0", asSequenceValue: " ")
+        
     }
     
 }
