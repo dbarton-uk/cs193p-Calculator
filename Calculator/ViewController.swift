@@ -61,6 +61,19 @@ class ViewController: UIViewController {
         sequence.text = " "
     }
     
+    @IBAction func touchBackspace(_ sender: UIButton) {
+        
+        if display.text!.characters.count == 1 {
+            display.text = " "
+            userIsInTheMiddleOfTyping = false;
+            return;
+        }
+        
+        let index = display.text!.index(before:display.text!.endIndex)        
+        
+        display.text!.remove(at: index)
+    }
+    
     @IBAction func performOperation(_ sender: UIButton) {
         
         if userIsInTheMiddleOfTyping {
