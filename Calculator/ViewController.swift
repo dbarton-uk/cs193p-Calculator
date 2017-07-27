@@ -14,9 +14,12 @@ class ViewController: UIViewController {
     
     private var userIsInTheMiddleOfTyping = false
     
-    private var displayValue: Double {
+    var displayValue: Double {
         get {
             return Double(display.text!)!
+        }
+        set {
+            display.text = String(newValue)
         }
     }
     
@@ -70,6 +73,11 @@ class ViewController: UIViewController {
         let index = display.text!.index(before:display.text!.endIndex)        
         
         display.text!.remove(at: index)
+    }
+    
+    @IBAction func touchRandom(_ sender: UIButton) {
+        displayValue = Double(arc4random()) / Double(UInt32.max)
+        userIsInTheMiddleOfTyping = true
     }
     
     @IBAction func performOperation(_ sender: UIButton) {

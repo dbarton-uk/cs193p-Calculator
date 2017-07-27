@@ -34,10 +34,7 @@ class CalculatorTests: XCTestCase {
     var multiplyButton: UIButton!
     var equalsButton: UIButton!
     
-    var clearButton: UIButton!
-    
-    var backspaceButton: UIButton!
-    
+    var button: UIButton!
     
     override func setUp() {
         super.setUp()
@@ -93,9 +90,7 @@ class CalculatorTests: XCTestCase {
         equalsButton = UIButton()
         equalsButton.setTitle("=", for: .normal)
         
-        clearButton = UIButton()
-        
-        backspaceButton = UIButton()
+        button = UIButton()
         
     }
     
@@ -256,7 +251,7 @@ class CalculatorTests: XCTestCase {
     
     func test8() {
         
-        controller.touchClear(clearButton)
+        controller.touchClear(button)
         assertExpectedDisplayValue(for: "C", hasDisplayValue: "0", hasSequenceValue: " ")
     }
     
@@ -278,7 +273,7 @@ class CalculatorTests: XCTestCase {
         
         controller.touchDigit(sixButton)
         controller.touchDigit(sevenButton)
-        controller.touchBackspace(backspaceButton)
+        controller.touchBackspace(button)
         assertExpectedDisplayValue(for: "67B", hasDisplayValue: "6", hasSequenceValue: " ")
     }
     
@@ -286,8 +281,8 @@ class CalculatorTests: XCTestCase {
         
         controller.touchDigit(sixButton)
         controller.touchDigit(sevenButton)
-        controller.touchBackspace(backspaceButton)
-        controller.touchBackspace(backspaceButton)
+        controller.touchBackspace(button)
+        controller.touchBackspace(button)
         
         assertExpectedDisplayValue(for: "67BB", hasDisplayValue: " ", hasSequenceValue: " ")
     }
@@ -296,10 +291,10 @@ class CalculatorTests: XCTestCase {
         
         controller.touchDigit(sixButton)
         controller.touchDigit(sevenButton)
-        controller.touchBackspace(backspaceButton)
-        controller.touchBackspace(backspaceButton)
+        controller.touchBackspace(button)
+        controller.touchBackspace(button)
         
-        controller.touchBackspace(backspaceButton)
+        controller.touchBackspace(button)
         assertExpectedDisplayValue(for: "67BBB", hasDisplayValue: " ", hasSequenceValue: " ")        
     }
     
@@ -328,6 +323,25 @@ class CalculatorTests: XCTestCase {
         
         assertExpectedDisplayValue(for: "16√", hasDisplayValue: "4", hasSequenceValue: "√(16) =")
         
+    }
+    
+    func testExtraCredit3a() {
+        
+        controller.touchRandom(button)
+        
+        XCTAssert(controller.displayValue > 0, "R displays \(controller.displayValue) which is not > 0")
+        XCTAssert(controller.displayValue < 1, "R displays \(controller.displayValue) which is not < 1")
+    }
+    
+    func testExtraCredit3b() {
+        
+        controller.touchDigit(oneButton)
+        controller.performOperation(plusButton)
+        controller.touchRandom(button)
+        controller.performOperation(equalsButton)
+        
+        XCTAssert(controller.displayValue > 1, "R displays \(controller.displayValue) which is not > 1")
+        XCTAssert(controller.displayValue < 2, "R displays \(controller.displayValue) which is not < 2")
     }
     
     private func assertExpectedDisplayValue(for input: String, hasDisplayValue expectedDisplayValue: String! = nil, hasSequenceValue expectedSequenceValue: String! = nil) {
