@@ -77,14 +77,14 @@ class ViewController: UIViewController {
     
     @IBAction func touchRandom(_ sender: UIButton) {
         displayValue = Double(arc4random()) / Double(UInt32.max)
-        userIsInTheMiddleOfTyping = true
+        setBrainOperand()
+
     }
     
     @IBAction func performOperation(_ sender: UIButton) {
         
         if userIsInTheMiddleOfTyping {
-            brain.setOperand(displayValue)
-            userIsInTheMiddleOfTyping = false
+            setBrainOperand()
         }
         
         if let mathematicalSymbol = sender.currentTitle {
@@ -96,6 +96,11 @@ class ViewController: UIViewController {
         }
 
         sequence.text = brain.sequence
+    }
+    
+    private func setBrainOperand() {
+        brain.setOperand(displayValue)
+        userIsInTheMiddleOfTyping = false
     }
 
 }
