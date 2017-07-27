@@ -43,10 +43,19 @@ struct CalculatorBrain {
     
     private let formatter = NumberFormatter()
     
-    var result: Double? {
+    init() {
+        formatter.maximumFractionDigits = 6
+    }
+    
+    
+    var result: String? {
         get {
-            return accumulator.value
+            return accumulator.value != nil ? format(accumulator.value!) : nil
         }
+    }
+    
+    private func format(_ double: Double) -> String {
+        return formatter.string(from: (double as NSNumber))!
     }
     
     var sequence: String {
@@ -67,9 +76,6 @@ struct CalculatorBrain {
         accumulator = (operand, format(operand))
     }
     
-    private func format(_ double: Double) -> String {
-        return formatter.string(from: (double as NSNumber))!
-    }
     
     mutating func performOperation(_ symbol: String) {
         

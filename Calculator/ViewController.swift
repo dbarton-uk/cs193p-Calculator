@@ -18,11 +18,6 @@ class ViewController: UIViewController {
         get {
             return Double(display.text!)!
         }
-        set {
-            let formatter = NumberFormatter()
-            formatter.maximumFractionDigits = 6
-            display.text = formatter.string(from: (newValue as NSNumber))
-        }
     }
     
     @IBOutlet weak var display: UILabel!
@@ -89,7 +84,7 @@ class ViewController: UIViewController {
         }
         
         if let result = brain.result {
-            displayValue = result
+            display.text = result
         }
 
         sequence.text = brain.sequence
