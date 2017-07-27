@@ -41,6 +41,8 @@ struct CalculatorBrain {
         }
     }
     
+    private let formatter = NumberFormatter()
+    
     var result: Double? {
         get {
             return accumulator.value
@@ -62,7 +64,11 @@ struct CalculatorBrain {
     }
     
     mutating func setOperand(_ operand: Double) {
-        accumulator = (operand, String(operand))
+        accumulator = (operand, format(operand))
+    }
+    
+    private func format(_ double: Double) -> String {
+        return formatter.string(from: (double as NSNumber))!
     }
     
     mutating func performOperation(_ symbol: String) {
@@ -131,5 +137,5 @@ struct CalculatorBrain {
             
         }
     }
-
+    
 }

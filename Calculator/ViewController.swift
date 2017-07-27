@@ -19,7 +19,9 @@ class ViewController: UIViewController {
             return Double(display.text!)!
         }
         set {
-            display.text = String(newValue)
+            let formatter = NumberFormatter()
+            formatter.maximumFractionDigits = 6
+            display.text = formatter.string(from: (newValue as NSNumber))
         }
     }
     
@@ -46,8 +48,9 @@ class ViewController: UIViewController {
             userIsInTheMiddleOfTyping = true
         }
         
+       
         if !display.text!.contains(".") {
-            touchDigit(sender)
+            display.text! += "."
         }
 
     }
@@ -91,5 +94,6 @@ class ViewController: UIViewController {
 
         sequence.text = brain.sequence
     }
+
 }
 
