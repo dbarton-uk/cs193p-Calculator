@@ -64,6 +64,10 @@ class ViewController: UIViewController {
     
     @IBAction func touchBackspace(_ sender: UIButton) {
         
+        if !userIsInTheMiddleOfTyping {
+            return
+        }
+        
         if display.text!.characters.count == 1 {
             display.text = " "
             userIsInTheMiddleOfTyping = false;

@@ -287,6 +287,7 @@ class CalculatorTests: XCTestCase {
         assertExpectedDisplayValue(for: "67BB", hasDisplayValue: " ", hasSequenceValue: " ")
     }
     
+   
     func testExtraCredit1c() {
         
         controller.touchDigit(sixButton)
@@ -296,6 +297,17 @@ class CalculatorTests: XCTestCase {
         
         controller.touchBackspace(button)
         assertExpectedDisplayValue(for: "67BBB", hasDisplayValue: " ", hasSequenceValue: " ")        
+    }
+    
+    func testExtraCredit1d() {
+        
+        controller.touchDigit(sixButton)
+        controller.touchDigit(sevenButton)
+        controller.performOperation(plusButton)
+        controller.touchBackspace(button)
+        
+        assertExpectedDisplayValue(for: "67+B", hasDisplayValue: "67", hasSequenceValue: "67 + ...")
+        
     }
     
     func testExtraCredit2a() {
