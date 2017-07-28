@@ -95,18 +95,27 @@ class ViewController: UIViewController {
             brain.performOperation(mathematicalSymbol)
         }
         
-        if let result = brain.result {
-            display.text = result
+        let (result, resultIsPending, description) = brain.evaluate()
+        
+        if result != nil {
+            display.text = format(result!)
         }
         
-        let postfix = brain.resultIsPending ? "..." : "="
+        let postfix = resultIsPending ? "..." : "="
+        
+        sequence.text = description + postfix
 
-        sequence.text = brain.sequence + postfix
     }
     
     private func setBrainOperand() {
         brain.setOperand(displayValue)
         userIsInTheMiddleOfTyping = false
+    }
+    
+    private func format(_ double: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 6
+        return formatter.string(from: (double as NSNumber))!
     }
 
 }

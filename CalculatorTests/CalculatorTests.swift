@@ -291,7 +291,7 @@ class CalculatorTests: XCTestCase {
         assertExpectedDisplayValue(for: "67BB", hasDisplayValue: " ", hasSequenceValue: " ")
     }
     
-   
+    
     func testA1_e1c() {
         
         controller.touchDigit(sixButton)
@@ -300,7 +300,7 @@ class CalculatorTests: XCTestCase {
         controller.touchBackspace(button)
         
         controller.touchBackspace(button)
-        assertExpectedDisplayValue(for: "67BBB", hasDisplayValue: " ", hasSequenceValue: " ")        
+        assertExpectedDisplayValue(for: "67BBB", hasDisplayValue: " ", hasSequenceValue: " ")
     }
     
     func testA1_e1d() {
@@ -315,7 +315,7 @@ class CalculatorTests: XCTestCase {
     }
     
     func testA1_e2a() {
-
+        
         controller.touchPoint(pointButton)
         controller.touchDigit(oneButton)
         controller.touchDigit(twoButton)
@@ -365,23 +365,28 @@ class CalculatorTests: XCTestCase {
         brain.setOperand(variable: "x")
         brain.performOperation("cos")
         
-        XCTAssertEqual(brain.sequence, "cos(x) ", "Setting operand to x and then performing cos does not create cos(x) is in the Brain")
+        let description = brain.evaluate().description
+        
+        XCTAssertEqual(description, "cos(x) ", "Setting operand to x and then performing cos does not create cos(x) is in the Brain")
         
     }
     
     func testA2_4() {
         
         brain.setOperand(variable: "x")
-        controller.performOperation(plusButton)
+        brain.performOperation("+")
         brain.setOperand(variable: "y")
+        brain.performOperation("+")
+        brain.setOperand(variable: "z")
+        brain.performOperation("=")
         
         let variables = ["x":10.0, "y":20.0]
-
+        
         let (result, isPending, description) = brain.evaluate(using: variables)
         
-        XCTAssertEqual(result, 30.0, "result of 10+20 should be equal to 30")
+        XCTAssertEqual(result, 30.0, "result of x+y+z, where x = 10.0 and y = 20.0 and z is not set should be equal to 30.0")
         XCTAssertEqual(isPending, false, "isPending should be false")
-        XCTAssertEqual(description, "10 + 20 ", "description of 10+20 should be 10 + 20 ")
+        XCTAssertEqual(description, "x + y + z ", "description of x+y+z should be x + y + z ")
         
     }
     
@@ -392,9 +397,9 @@ class CalculatorTests: XCTestCase {
         }
         
         if let sequenceValue = expectedSequenceValue {
-             XCTAssertEqual(controller.sequence.text!, sequenceValue, "Input for \(input) does not display as \(sequenceValue).")
+            XCTAssertEqual(controller.sequence.text!, sequenceValue, "Input for \(input) does not display as \(sequenceValue).")
         }
-       
+        
     }
     
     
