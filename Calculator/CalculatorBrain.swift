@@ -65,7 +65,11 @@ struct CalculatorBrain {
     
     init() {
         formatter.maximumFractionDigits = 6
-    } 
+    }
+    
+    mutating func setOperand(variable named: String) {
+        accumulator = (0, named)
+    }
     
     mutating func setOperand(_ operand: Double) {
         accumulator = (operand, format(operand))

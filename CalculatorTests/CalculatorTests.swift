@@ -360,6 +360,15 @@ class CalculatorTests: XCTestCase {
         XCTAssert(controller.displayValue < 2, "R displays \(controller.displayValue) which is not < 2")
     }
     
+    func testA2_3() {
+        
+        brain.setOperand(variable: "x")
+        brain.performOperation("cos")
+        
+        XCTAssertEqual(brain.sequence, "cos(x) ", "Setting operand to x and then performing cos does not create cos(x) is in the Brain")
+        
+    }
+    
     private func assertExpectedDisplayValue(for input: String, hasDisplayValue expectedDisplayValue: String! = nil, hasSequenceValue expectedSequenceValue: String! = nil) {
         
         if let displayValue = expectedDisplayValue {
