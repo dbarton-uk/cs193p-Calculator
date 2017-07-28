@@ -10,6 +10,32 @@ import Foundation
 
 struct CalculatorBrain {
     
+    var resultIsPending: Bool {
+        get {
+            return pendingBinaryOperation != nil
+        }
+    }
+    
+    var result: String? {
+        get {
+            return accumulator.value != nil ? format(accumulator.value!) : nil
+        }
+    }
+    
+    var sequence: String {
+        get {
+            
+            let accumulatorDescription = accumulator.description == nil ? "" : accumulator.description! + " "
+            
+            if let pending = pendingBinaryOperation {
+                return pending.description + accumulatorDescription
+            } else {
+                return accumulatorDescription
+            }
+            
+        }
+    }
+    
     private enum Operation {
         case constant(Double)
         case unaryOperation((Double) -> Double)
@@ -35,47 +61,15 @@ struct CalculatorBrain {
     
     private var accumulator: (value: Double?, description: String?)
     
-    private var resultIsPending: Bool {
-        get {
-            return pendingBinaryOperation != nil
-        }
-    }
-    
     private let formatter = NumberFormatter()
     
     init() {
         formatter.maximumFractionDigits = 6
-    }
-    
-    
-    var result: String? {
-        get {
-            return accumulator.value != nil ? format(accumulator.value!) : nil
-        }
-    }
-    
-    private func format(_ double: Double) -> String {
-        return formatter.string(from: (double as NSNumber))!
-    }
-    
-    var sequence: String {
-        get {
-            let postfix = resultIsPending ? "..." : "="
-            
-            let accumulatorDescription = accumulator.description == nil ? "" : accumulator.description! + " "
-            
-            if (resultIsPending) {
-                return pendingBinaryOperation!.description + accumulatorDescription + postfix
-            } else {
-                return accumulatorDescription + postfix
-            }
-        }
-    }
+    } 
     
     mutating func setOperand(_ operand: Double) {
         accumulator = (operand, format(operand))
     }
-    
     
     mutating func performOperation(_ symbol: String) {
         
@@ -109,6 +103,10 @@ struct CalculatorBrain {
                 performPendingBinaryOperation()
             }
         }
+    }
+    
+    private func format(_ double: Double) -> String {
+        return formatter.string(from: (double as NSNumber))!
     }
     
     private var pendingBinaryOperation: PendingBinaryOperation?    

@@ -36,6 +36,8 @@ class CalculatorTests: XCTestCase {
     
     var button: UIButton!
     
+    var brain: CalculatorBrain!
+    
     override func setUp() {
         super.setUp()
         
@@ -91,6 +93,8 @@ class CalculatorTests: XCTestCase {
         equalsButton.setTitle("=", for: .normal)
         
         button = UIButton()
+        
+        brain = CalculatorBrain()
         
     }
     
@@ -365,8 +369,9 @@ class CalculatorTests: XCTestCase {
         if let sequenceValue = expectedSequenceValue {
              XCTAssertEqual(controller.sequence.text!, sequenceValue, "Input for \(input) does not display as \(sequenceValue).")
         }
-        
        
-    }   
+    }
+    
+    
     
 }

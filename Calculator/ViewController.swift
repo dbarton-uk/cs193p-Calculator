@@ -98,8 +98,10 @@ class ViewController: UIViewController {
         if let result = brain.result {
             display.text = result
         }
+        
+        let postfix = brain.resultIsPending ? "..." : "="
 
-        sequence.text = brain.sequence
+        sequence.text = brain.sequence + postfix
     }
     
     private func setBrainOperand() {
