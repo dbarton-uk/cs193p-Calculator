@@ -369,6 +369,22 @@ class CalculatorTests: XCTestCase {
         
     }
     
+    func testA2_4() {
+        
+        brain.setOperand(variable: "x")
+        controller.performOperation(plusButton)
+        brain.setOperand(variable: "y")
+        
+        let variables = ["x":10.0, "y":20.0]
+
+        let (result, isPending, description) = brain.evaluate(using: variables)
+        
+        XCTAssertEqual(result, 30.0, "result of 10+20 should be equal to 30")
+        XCTAssertEqual(isPending, false, "isPending should be false")
+        XCTAssertEqual(description, "10 + 20 ", "description of 10+20 should be 10 + 20 ")
+        
+    }
+    
     private func assertExpectedDisplayValue(for input: String, hasDisplayValue expectedDisplayValue: String! = nil, hasSequenceValue expectedSequenceValue: String! = nil) {
         
         if let displayValue = expectedDisplayValue {
