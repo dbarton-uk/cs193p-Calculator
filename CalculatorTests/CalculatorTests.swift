@@ -390,6 +390,19 @@ class CalculatorTests: XCTestCase {
         
     }
     
+    func testA2_7e1() {
+        
+        controller.touchDigit(nineButton)
+        controller.performOperation(plusButton)
+        controller.touchMButton(button)
+        controller.performOperation(equalsButton)
+        controller.performOperation(rootButton)
+        
+        assertExpectedDisplayValue(for: "9+M=√", hasDisplayValue: "3", hasSequenceValue: "√(9 + M) =")
+    
+    
+    }
+    
     private func assertExpectedDisplayValue(for input: String, hasDisplayValue expectedDisplayValue: String! = nil, hasSequenceValue expectedSequenceValue: String! = nil) {
         
         if let displayValue = expectedDisplayValue {

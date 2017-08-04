@@ -85,6 +85,16 @@ class ViewController: UIViewController {
 
     }
     
+    
+    @IBAction func touchMButton(_ sender: UIButton) {
+        
+        brain.setOperand(variable: "M")
+        evaluateAndSetDisplay();        
+        userIsInTheMiddleOfTyping = false
+    }
+    
+    
+    
     @IBAction func performOperation(_ sender: UIButton) {
         
         if userIsInTheMiddleOfTyping {
@@ -95,6 +105,17 @@ class ViewController: UIViewController {
             brain.performOperation(mathematicalSymbol)
         }
         
+        evaluateAndSetDisplay()
+
+    }
+    
+    private func setBrainOperand() {
+        brain.setOperand(displayValue)
+        userIsInTheMiddleOfTyping = false
+    }
+    
+    private func evaluateAndSetDisplay() {
+        
         let (result, resultIsPending, description) = brain.evaluate()
         
         if result != nil {
@@ -104,12 +125,7 @@ class ViewController: UIViewController {
         let postfix = resultIsPending ? "..." : "="
         
         sequence.text = description + postfix
-
-    }
-    
-    private func setBrainOperand() {
-        brain.setOperand(displayValue)
-        userIsInTheMiddleOfTyping = false
+        
     }
     
     private func format(_ double: Double) -> String {
