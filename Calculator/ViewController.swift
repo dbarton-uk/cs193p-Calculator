@@ -72,6 +72,8 @@ class ViewController: UIViewController {
     @IBAction func touchClear(_ sender: UIButton) {
         
         brain = CalculatorBrain()
+        variables.removeAll()
+        memory.text = " "
         
         userIsInTheMiddleOfTyping = false
         display.text = "0"

@@ -451,6 +451,20 @@ class CalculatorTests: XCTestCase {
         
     }
     
+    func testA2_9() {
+        
+        controller.touchDigit(nineButton)
+        controller.touchSetMButton(button)
+        controller.touchClear(button)
+        controller.touchDigit(threeButton)
+        controller.performOperation(plusButton)
+        controller.touchMButton(button)
+        controller.performOperation(equalsButton)
+        
+        assertExpectedDisplayValue(for: "9→MC3+M", hasDisplayValue: "3", hasSequenceValue: "3+M=", hasMemoryValue: " ")
+        
+    }
+    
     
     private func assertExpectedDisplayValue(for input: String, hasDisplayValue expectedDisplayValue: String! = nil, hasSequenceValue expectedSequenceValue: String! = nil, hasMemoryValue expectedMemoryValue: String! = nil) {
         
@@ -468,7 +482,5 @@ class CalculatorTests: XCTestCase {
         }
         
     }
-    
-    
     
 }
