@@ -363,7 +363,7 @@ class CalculatorTests: XCTestCase {
     func testA2_3() {
         
         brain.setOperand(variable: "x")
-        brain.performOperation("cos")
+        brain.setOperation("cos")
         
         let description = brain.evaluate().description
         
@@ -374,11 +374,11 @@ class CalculatorTests: XCTestCase {
     func testA2_4() {
         
         brain.setOperand(variable: "x")
-        brain.performOperation("+")
+        brain.setOperation("+")
         brain.setOperand(variable: "y")
-        brain.performOperation("+")
+        brain.setOperation("+")
         brain.setOperand(variable: "z")
-        brain.performOperation("=")
+        brain.setOperation("=")
         
         let variables = ["x":10.0, "y":20.0]
         

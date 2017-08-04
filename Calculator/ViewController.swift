@@ -102,7 +102,7 @@ class ViewController: UIViewController {
         }
         
         if let mathematicalSymbol = sender.currentTitle {
-            brain.performOperation(mathematicalSymbol)
+            brain.setOperation(mathematicalSymbol)
         }
         
         evaluateAndSetDisplay()

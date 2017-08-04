@@ -92,7 +92,7 @@ struct CalculatorBrain {
             }
         }
         
-        func performMyOperation(_ symbol: String) {
+        func performOperation(_ symbol: String) {
             
             if let operation = operations[symbol] {
                 
@@ -135,7 +135,7 @@ struct CalculatorBrain {
                 accumulator = (value, format(value))
                 
             case .operation(let symbol):
-                performMyOperation(symbol)
+                performOperation(symbol)
                 
             case .variable(let variable):
                 
@@ -164,7 +164,7 @@ struct CalculatorBrain {
     }
     
     
-    mutating func performOperation(_ symbol: String) {
+    mutating func setOperation(_ symbol: String) {
         stack.append(Element.operation(symbol))
     }
     
