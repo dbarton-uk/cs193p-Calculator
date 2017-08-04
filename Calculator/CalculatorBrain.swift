@@ -79,28 +79,8 @@ struct CalculatorBrain {
     
     func evaluate(using variables: Dictionary<String, Double>? = nil) -> (result: Double?, isPending: Bool, description: String) {
         
-        struct PendingBinaryOperation {
-            let function: (Double, Double) -> Double
-            let firstOperand: (value: Double?, description: String?)
-            let symbol: String
-            
-            var description: String {
-                
-                get {
-                    return firstOperand.description! + " " + symbol + " "
-                }
-            }
-            
-            func perform(with secondOperand: (value: Double?, description: String?)) -> (Double?, String?) {
-                
-                let newValue = function(firstOperand.value!, secondOperand.value!)
-                let newDescription = self.description + (secondOperand.description ?? "")
-                
-                return (newValue, newDescription)
-            }
-        }
-        
         var accumulator: (value: Double?, description: String?)
+        
         var pendingBinaryOperation: PendingBinaryOperation?
         
         func performPendingBinaryOperation() {
@@ -109,9 +89,7 @@ struct CalculatorBrain {
                 
                 accumulator = pendingBinaryOperation!.perform(with: accumulator)
                 pendingBinaryOperation = nil
-                
             }
-            
         }
         
         func performMyOperation(_ symbol: String) {
@@ -145,14 +123,11 @@ struct CalculatorBrain {
                 case .equals:
                     performPendingBinaryOperation()
                     
-                }
-                
+                }                
             }
         }
         
         for element in stack {
-            
-            print("current element  \(element)")
             
             switch(element) {
                 
