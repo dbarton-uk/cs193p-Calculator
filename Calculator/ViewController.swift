@@ -27,9 +27,20 @@ class ViewController: UIViewController {
         }
     }
     
+    var memoryValue: Double {
+        get {
+            return variables[ViewController.MEMORY_KEY] ?? 0
+        }
+        set {
+            variables.updateValue(newValue, forKey: ViewController.MEMORY_KEY)
+            memory.text = "M=" + String(format(newValue))
+        }
+    }
+    
     
     @IBOutlet weak var display: UILabel!
     @IBOutlet weak var sequence: UILabel!
+    @IBOutlet weak var memory: UILabel!
     
     @IBAction func touchDigit(_ sender: UIButton) {
         
@@ -92,7 +103,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchSetMButton(_ sender: UIButton) {
         
-        variables.updateValue(displayValue, forKey: ViewController.MEMORY_KEY)
+        memoryValue = displayValue
         evaluateAndSetDisplay()
         userIsInTheMiddleOfTyping = false
         
