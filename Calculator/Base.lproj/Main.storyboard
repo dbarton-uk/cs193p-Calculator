@@ -122,6 +122,9 @@
                                                         <state key="normal" title="→M">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="touchSetMButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yjk-bW-qln"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwA-1c-O1W">
                                                         <rect key="frame" x="58.5" y="0.0" width="50.5" height="100.5"/>

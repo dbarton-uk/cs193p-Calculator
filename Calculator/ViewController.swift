@@ -10,9 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    private static let MEMORY_KEY = "M"
+    
     private var brain = CalculatorBrain()
     
     private var userIsInTheMiddleOfTyping = false
+    
+    private var variables = Dictionary<String, Double>()
     
     var displayValue: Double {
         get {
@@ -22,6 +26,7 @@ class ViewController: UIViewController {
             display.text = String(newValue)
         }
     }
+    
     
     @IBOutlet weak var display: UILabel!
     @IBOutlet weak var sequence: UILabel!
@@ -85,11 +90,18 @@ class ViewController: UIViewController {
 
     }
     
+    @IBAction func touchSetMButton(_ sender: UIButton) {
+        
+        variables.updateValue(displayValue, forKey: ViewController.MEMORY_KEY)
+        evaluateAndSetDisplay()
+        userIsInTheMiddleOfTyping = false
+        
+    }
     
     @IBAction func touchMButton(_ sender: UIButton) {
         
-        brain.setOperand(variable: "M")
-        evaluateAndSetDisplay();        
+        brain.setOperand(variable: ViewController.MEMORY_KEY)
+        evaluateAndSetDisplay();
         userIsInTheMiddleOfTyping = false
     }
     
@@ -116,7 +128,7 @@ class ViewController: UIViewController {
     
     private func evaluateAndSetDisplay() {
         
-        let (result, resultIsPending, description) = brain.evaluate()
+        let (result, resultIsPending, description) = brain.evaluate(using: variables)
         
         if result != nil {
             display.text = format(result!)
