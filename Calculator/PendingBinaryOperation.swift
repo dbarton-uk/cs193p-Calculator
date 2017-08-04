@@ -16,7 +16,7 @@ struct PendingBinaryOperation {
     var description: String {
         
         get {
-            return firstOperand.description! + " " + symbol + " "
+            return firstOperand.description! + symbol
         }
     }
     

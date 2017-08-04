@@ -132,7 +132,7 @@ class CalculatorTests: XCTestCase {
         controller.touchDigit(sevenButton)
         controller.performOperation(plusButton)
         
-        assertExpectedDisplayValue(for: "7+", hasDisplayValue: "7", hasSequenceValue: "7 + ...")
+        assertExpectedDisplayValue(for: "7+", hasDisplayValue: "7", hasSequenceValue: "7+...")
     }
     
     func testA1_7b() {
@@ -141,7 +141,7 @@ class CalculatorTests: XCTestCase {
         controller.performOperation(plusButton)
         controller.touchDigit(nineButton)
         
-        assertExpectedDisplayValue(for: "7+9", hasDisplayValue: "9", hasSequenceValue: "7 + ...")
+        assertExpectedDisplayValue(for: "7+9", hasDisplayValue: "9", hasSequenceValue: "7+...")
     }
     
     func testA1_7c() {
@@ -151,7 +151,7 @@ class CalculatorTests: XCTestCase {
         controller.touchDigit(nineButton)
         controller.performOperation(equalsButton)
         
-        assertExpectedDisplayValue(for: "7+9=", hasDisplayValue: "16", hasSequenceValue: "7 + 9 =")
+        assertExpectedDisplayValue(for: "7+9=", hasDisplayValue: "16", hasSequenceValue: "7+9=")
     }
     
     func testA1_7d() {
@@ -162,7 +162,7 @@ class CalculatorTests: XCTestCase {
         controller.performOperation(equalsButton)
         controller.performOperation(rootButton)
         
-        assertExpectedDisplayValue(for: "7+9=√", hasDisplayValue: "4", hasSequenceValue: "√(7 + 9) =")
+        assertExpectedDisplayValue(for: "7+9=√", hasDisplayValue: "4", hasSequenceValue: "√(7+9)=")
     }
     
     func testA1_7e() {
@@ -176,7 +176,7 @@ class CalculatorTests: XCTestCase {
         controller.touchDigit(twoButton)
         controller.performOperation(equalsButton)
         
-        assertExpectedDisplayValue(for: "7+9=√+2=", hasDisplayValue: "6", hasSequenceValue: "√(7 + 9) + 2 =")
+        assertExpectedDisplayValue(for: "7+9=√+2=", hasDisplayValue: "6", hasSequenceValue: "√(7+9)+2=")
     }
     
     func testA1_7f() {
@@ -186,7 +186,7 @@ class CalculatorTests: XCTestCase {
         controller.touchDigit(nineButton)
         controller.performOperation(rootButton)
         
-        assertExpectedDisplayValue(for: "7+9√", hasDisplayValue: "3", hasSequenceValue: "7 + √(9) ...")
+        assertExpectedDisplayValue(for: "7+9√", hasDisplayValue: "3", hasSequenceValue: "7+√(9)...")
     }
     
     func testA1_7g() {
@@ -197,7 +197,7 @@ class CalculatorTests: XCTestCase {
         controller.performOperation(rootButton)
         controller.performOperation(equalsButton)
         
-        assertExpectedDisplayValue(for: "7+9√=", hasDisplayValue: "10", hasSequenceValue: "7 + √(9) =")
+        assertExpectedDisplayValue(for: "7+9√=", hasDisplayValue: "10", hasSequenceValue: "7+√(9)=")
     }
     
     func testA1_7h() {
@@ -213,7 +213,7 @@ class CalculatorTests: XCTestCase {
         controller.touchDigit(threeButton)
         controller.performOperation(equalsButton)
         
-        assertExpectedDisplayValue(for: "7+9=+6=+3=", hasDisplayValue: "25", hasSequenceValue: "7 + 9 + 6 + 3 =")
+        assertExpectedDisplayValue(for: "7+9=+6=+3=", hasDisplayValue: "25", hasSequenceValue: "7+9+6+3=")
     }
     
     func testA1_7i() {
@@ -228,7 +228,7 @@ class CalculatorTests: XCTestCase {
         controller.touchDigit(threeButton)
         controller.performOperation(equalsButton)
         
-        assertExpectedDisplayValue(for: "7+9=√6+3=", hasDisplayValue: "9", hasSequenceValue: "6 + 3 =")
+        assertExpectedDisplayValue(for: "7+9=√6+3=", hasDisplayValue: "9", hasSequenceValue: "6+3=")
     }
     
     func testA1_7j() {
@@ -240,7 +240,7 @@ class CalculatorTests: XCTestCase {
         controller.touchDigit(sevenButton)
         controller.touchDigit(threeButton)
         
-        assertExpectedDisplayValue(for: "5+6=73", hasDisplayValue: "73", hasSequenceValue: "5 + 6 =")
+        assertExpectedDisplayValue(for: "5+6=73", hasDisplayValue: "73", hasSequenceValue: "5+6=")
     }
     
     func testA1_7k() {
@@ -250,7 +250,7 @@ class CalculatorTests: XCTestCase {
         controller.performOperation(piButton)
         controller.performOperation(equalsButton)
         
-        assertExpectedDisplayValue(for: "4×π=", hasDisplayValue: "12.566371", hasSequenceValue: "4 × π =")
+        assertExpectedDisplayValue(for: "4×π=", hasDisplayValue: "12.566371", hasSequenceValue: "4×π=")
     }
     
     func testA1_8() {
@@ -270,7 +270,7 @@ class CalculatorTests: XCTestCase {
         controller.touchDigit(threeButton)
         controller.performOperation(equalsButton)
         
-        assertExpectedDisplayValue(for: "6×5×4×3=", hasDisplayValue: "360", hasSequenceValue: "6 × 5 × 4 × 3 =")
+        assertExpectedDisplayValue(for: "6×5×4×3=", hasDisplayValue: "360", hasSequenceValue: "6×5×4×3=")
     }
     
     func testA1_e1a() {
@@ -310,7 +310,7 @@ class CalculatorTests: XCTestCase {
         controller.performOperation(plusButton)
         controller.touchBackspace(button)
         
-        assertExpectedDisplayValue(for: "67+B", hasDisplayValue: "67", hasSequenceValue: "67 + ...")
+        assertExpectedDisplayValue(for: "67+B", hasDisplayValue: "67", hasSequenceValue: "67+...")
         
     }
     
@@ -337,7 +337,7 @@ class CalculatorTests: XCTestCase {
         controller.touchDigit(sixButton)
         controller.performOperation(rootButton)
         
-        assertExpectedDisplayValue(for: "16√", hasDisplayValue: "4", hasSequenceValue: "√(16) =")
+        assertExpectedDisplayValue(for: "16√", hasDisplayValue: "4", hasSequenceValue: "√(16)=")
         
     }
     
@@ -367,7 +367,7 @@ class CalculatorTests: XCTestCase {
         
         let description = brain.evaluate().description
         
-        XCTAssertEqual(description, "cos(x) ", "Setting operand to x and then performing cos does not create cos(x) is in the Brain")
+        XCTAssertEqual(description, "cos(x)", "Setting operand to x and then performing cos does not create cos(x) is in the Brain")
         
     }
     
@@ -386,7 +386,7 @@ class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(result, 30.0, "result of x+y+z, where x = 10.0 and y = 20.0 and z is not set should be equal to 30.0")
         XCTAssertEqual(isPending, false, "isPending should be false")
-        XCTAssertEqual(description, "x + y + z ", "description of x+y+z should be x + y + z ")
+        XCTAssertEqual(description, "x+y+z", "description of x+y+z should be x+y+z")
         
     }
     
@@ -398,7 +398,7 @@ class CalculatorTests: XCTestCase {
         controller.performOperation(equalsButton)
         controller.performOperation(rootButton)
         
-        assertExpectedDisplayValue(for: "9+M=√", hasDisplayValue: "3", hasSequenceValue: "√(9 + M) =")
+        assertExpectedDisplayValue(for: "9+M=√", hasDisplayValue: "3", hasSequenceValue: "√(9+M)=")
     
     
     }

@@ -153,7 +153,7 @@ struct CalculatorBrain {
         let result = accumulator.value
         let isPending = pendingBinaryOperation != nil
         
-        var description = accumulator.description == nil ? "" : accumulator.description! + " "
+        var description = accumulator.description ?? ""
         
         if isPending {
             description = pendingBinaryOperation!.description + description
