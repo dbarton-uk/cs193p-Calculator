@@ -27,6 +27,7 @@ class CalculatorTests: XCTestCase {
     var pointButton: UIButton!
     
     var piButton: UIButton!
+    var cosButton: UIButton!
     
     var rootButton: UIButton!
     
@@ -79,6 +80,9 @@ class CalculatorTests: XCTestCase {
         
         piButton = UIButton()
         piButton.setTitle("π", for: .normal)
+        
+        cosButton = UIButton()
+        cosButton.setTitle("cos", for: .normal)
         
         rootButton = UIButton()
         rootButton.setTitle("√", for: .normal)
@@ -298,8 +302,8 @@ class CalculatorTests: XCTestCase {
         controller.touchDigit(sevenButton)
         controller.touchBackspace(button)
         controller.touchBackspace(button)
-        
         controller.touchBackspace(button)
+        
         assertExpectedDisplayValue(for: "67BBB", hasDisplayValue: " ", hasSequenceValue: " ")
     }
     
@@ -310,8 +314,7 @@ class CalculatorTests: XCTestCase {
         controller.performOperation(plusButton)
         controller.touchBackspace(button)
         
-        assertExpectedDisplayValue(for: "67+B", hasDisplayValue: "67", hasSequenceValue: "67+...")
-        
+        assertExpectedDisplayValue(for: "67+B", hasDisplayValue: "67", hasSequenceValue: "67=")
     }
     
     func testA1_e2a() {
@@ -338,7 +341,6 @@ class CalculatorTests: XCTestCase {
         controller.performOperation(rootButton)
         
         assertExpectedDisplayValue(for: "16√", hasDisplayValue: "4", hasSequenceValue: "√(16)=")
-        
     }
     
     func testA1_e3a() {
@@ -368,7 +370,6 @@ class CalculatorTests: XCTestCase {
         let description = brain.evaluate().description
         
         XCTAssertEqual(description, "cos(x)", "Setting operand to x and then performing cos does not create cos(x) is in the Brain")
-        
     }
     
     func testA2_4() {
@@ -387,7 +388,6 @@ class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 30.0, "result of x+y+z, where x = 10.0 and y = 20.0 and z is not set should be equal to 30.0")
         XCTAssertEqual(isPending, false, "isPending should be false")
         XCTAssertEqual(description, "x+y+z", "description of x+y+z should be x+y+z")
-        
     }
     
     func testA2_7a() {
@@ -399,7 +399,6 @@ class CalculatorTests: XCTestCase {
         controller.performOperation(rootButton)
         
         assertExpectedDisplayValue(for: "9+M=√", hasDisplayValue: "3", hasSequenceValue: "√(9+M)=", hasMemoryValue: " ")
-    
     }
     
     func testA2_7b() {
@@ -413,7 +412,6 @@ class CalculatorTests: XCTestCase {
         controller.touchSetMButton(button)
         
         assertExpectedDisplayValue(for: "9+M=√7→M", hasDisplayValue: "4", hasSequenceValue: "√(9+M)=", hasMemoryValue: "M=7")
-        
     }
     
     func testA2_7c() {
@@ -431,7 +429,6 @@ class CalculatorTests: XCTestCase {
         controller.performOperation(equalsButton)
         
         assertExpectedDisplayValue(for: "9+M=√7→M+14=", hasDisplayValue: "18", hasSequenceValue: "√(9+M)+14=", hasMemoryValue: "M=7")
-        
     }
     
     func testA2_8() {
@@ -448,7 +445,6 @@ class CalculatorTests: XCTestCase {
         controller.touchSetMButton(button)
         
         assertExpectedDisplayValue(for: "9+M=√7→M16→M", hasDisplayValue: "5", hasSequenceValue: "√(9+M)=", hasMemoryValue: "M=16")
-        
     }
     
     func testA2_9() {
@@ -462,6 +458,51 @@ class CalculatorTests: XCTestCase {
         controller.performOperation(equalsButton)
         
         assertExpectedDisplayValue(for: "9→MC3+M", hasDisplayValue: "3", hasSequenceValue: "3+M=", hasMemoryValue: " ")
+    }
+    
+    func testA2_10a() {
+        
+        controller.touchDigit(nineButton)
+        controller.performOperation(plusButton)
+        controller.touchBackspace(button)
+        
+        assertExpectedDisplayValue(for: "9+B", hasDisplayValue: "9", hasSequenceValue: "9=", hasMemoryValue: " ")
+    }
+    
+    func testA2_10b() {
+        controller.touchBackspace(button)
+    }
+    
+    func testA2_10c() {
+        
+        controller.touchDigit(fiveButton)
+        controller.touchSetMButton(button)
+        controller.touchBackspace(button)
+        
+        assertExpectedDisplayValue(for: "5→MB", hasDisplayValue: "5", hasSequenceValue: " ", hasMemoryValue: "M=5")
+    }
+    
+    func testA2_10d() {
+        
+        controller.touchMButton(button)
+        controller.touchBackspace(button)
+        controller.touchDigit(twoButton)
+        controller.performOperation(plusButton)
+        controller.touchDigit(fiveButton)
+        controller.performOperation(equalsButton)
+        
+        assertExpectedDisplayValue(for: "MB2+5=", hasDisplayValue: "7", hasSequenceValue: "2+5=", hasMemoryValue: " ")
+    }
+    
+    func testA2_10e() {
+        
+        controller.touchMButton(button)
+        controller.performOperation(cosButton)
+        controller.performOperation(piButton)
+        controller.touchSetMButton(button)
+        controller.touchBackspace(button)
+        
+        assertExpectedDisplayValue(for: "McosπMB", hasDisplayValue: "-1", hasSequenceValue: "cos(M)=", hasMemoryValue: "M=3.141593")
         
     }
     

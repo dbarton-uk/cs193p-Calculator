@@ -82,9 +82,15 @@ class ViewController: UIViewController {
     
     @IBAction func touchBackspace(_ sender: UIButton) {
         
-        if !userIsInTheMiddleOfTyping {
-            return
+        if userIsInTheMiddleOfTyping {
+            performBackspace()
+        } else {
+            brain.undo()
+            evaluateAndSetDisplay()
         }
+    }
+    
+    private func performBackspace() {
         
         if display.text!.characters.count == 1 {
             display.text = " "
@@ -92,9 +98,10 @@ class ViewController: UIViewController {
             return;
         }
         
-        let index = display.text!.index(before:display.text!.endIndex)        
+        let index = display.text!.index(before:display.text!.endIndex)
         
         display.text!.remove(at: index)
+        
     }
     
     @IBAction func touchRandom(_ sender: UIButton) {
@@ -108,7 +115,6 @@ class ViewController: UIViewController {
         memoryValue = displayValue
         evaluateAndSetDisplay()
         userIsInTheMiddleOfTyping = false
-        
     }
     
     @IBAction func touchMButton(_ sender: UIButton) {
@@ -117,8 +123,6 @@ class ViewController: UIViewController {
         evaluateAndSetDisplay();
         userIsInTheMiddleOfTyping = false
     }
-    
-    
     
     @IBAction func performOperation(_ sender: UIButton) {
         
@@ -149,7 +153,7 @@ class ViewController: UIViewController {
         
         let postfix = resultIsPending ? "..." : "="
         
-        sequence.text = description + postfix
+        sequence.text = description == "" ? " " : description + postfix
         
     }
     

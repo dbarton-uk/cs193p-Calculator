@@ -168,6 +168,12 @@ struct CalculatorBrain {
         stack.append(Element.operation(symbol))
     }
     
+    mutating func undo() {
+        if !stack.isEmpty {
+        stack.removeLast()
+        }
+    }
+    
     private func format(_ double: Double) -> String {
         return formatter.string(from: (double as NSNumber))!
     }
