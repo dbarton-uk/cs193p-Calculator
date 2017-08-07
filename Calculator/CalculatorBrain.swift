@@ -8,6 +8,17 @@
 
 import Foundation
 
+func sqrtValidator(operand: Double) -> (String?) {
+    return operand < 0 ? "Cannot evaluate the square root of a negative number." : nil
+}
+
+
+func divisionValidator(divider: Double, divisor: Double) -> String? {
+    return divisor == 0 ? "Cannot evaluate a division where the divisor is 0." : nil
+}
+
+
+
 struct CalculatorBrain {
     
     @available(*, deprecated)
@@ -20,7 +31,7 @@ struct CalculatorBrain {
     @available(*, deprecated)
     var result: Double? {
         get {
-            return evaluate().result
+            return evaluate().result.value
         }
     }
     
@@ -30,11 +41,11 @@ struct CalculatorBrain {
             return evaluate().description
         }
     }
-    
+   
     private enum Operation {
         case constant(Double)
-        case unaryOperation((Double) -> Double)
-        case binaryOperation((Double, Double) -> Double)
+        case unaryOperation(operation: (Double) -> Double, validator: ((Double) -> String?)?)
+        case binaryOperation(operation: (Double, Double) -> Double, validator: ((Double, Double) -> String?)?)
         case equals
     }
     
@@ -44,19 +55,24 @@ struct CalculatorBrain {
         case variable(String)
     }
     
+    struct Result {
+        var value: Double?
+        var error: String?
+    }
+    
     private var operations: Dictionary<String, Operation> = [
         "π" : Operation.constant(Double.pi),
         "e" : Operation.constant(M_E),
-        "√" : Operation.unaryOperation(sqrt),
-        "x²": Operation.unaryOperation({ $0 * $0 }),
-        "sin": Operation.unaryOperation(sin),
-        "cos": Operation.unaryOperation(cos),
-        "tan": Operation.unaryOperation(tan),
-        "±": Operation.unaryOperation({ -$0}),
-        "×": Operation.binaryOperation({ $0 * $1 }),
-        "÷": Operation.binaryOperation({ $0 / $1 }),
-        "+": Operation.binaryOperation({ $0 + $1 }),
-        "−": Operation.binaryOperation({ $0 - $1 }),
+        "√" : Operation.unaryOperation(operation: sqrt, validator: sqrtValidator),
+        "x²": Operation.unaryOperation(operation: {$0 * $0}, validator: nil),
+        "sin": Operation.unaryOperation(operation: sin, validator: nil),
+        "cos": Operation.unaryOperation(operation: cos, validator: nil),
+        "tan": Operation.unaryOperation(operation: tan, validator: nil),
+        "±": Operation.unaryOperation(operation: { -$0}, validator: nil),
+        "×": Operation.binaryOperation(operation: { $0 * $1 }, validator: nil),
+        "÷": Operation.binaryOperation(operation: { $0 / $1 }, validator: divisionValidator),
+        "+": Operation.binaryOperation(operation: { $0 + $1 }, validator: nil),
+        "−": Operation.binaryOperation(operation: { $0 - $1 }, validator: nil),
         "=": Operation.equals
     ]
     
@@ -77,18 +93,20 @@ struct CalculatorBrain {
         stack.append(Element.number(operand))
     }
     
-    func evaluate(using variables: Dictionary<String, Double>? = nil) -> (result: Double?, isPending: Bool, description: String) {
+    func evaluate(using variables: Dictionary<String, Double>? = nil) -> (result: CalculatorBrain.Result, isPending: Bool, description: String) {
         
-        var accumulator: (value: Double?, description: String?)
+        var accumulator: (value: Double?, description: String?, error: String?)
         
         var pendingBinaryOperation: PendingBinaryOperation?
         
         func performPendingBinaryOperation() {
             
-            if pendingBinaryOperation != nil && accumulator.value != nil {
+            if pendingBinaryOperation != nil {
                 
-                accumulator = pendingBinaryOperation!.perform(with: accumulator)
-                pendingBinaryOperation = nil
+                if let value = accumulator.value {
+                    accumulator = pendingBinaryOperation!.perform(with: (value, accumulator.description))
+                    pendingBinaryOperation = nil
+                }
             }
         }
         
@@ -99,25 +117,26 @@ struct CalculatorBrain {
                 switch operation {
                     
                 case .constant(let value):
-                    accumulator = (value, symbol)
+                    accumulator = (value, symbol, nil)
                     
-                case .unaryOperation(let function):
+                case .unaryOperation(let (operation, validator)):
                     
-                    if accumulator.value != nil {
-                        
-                        let newValue = function(accumulator.value!)
+                    if let value = accumulator.value {
+
+                        let newValue = operation(value)
+                        let error = validator != nil ? validator!(value) : nil
                         let newDescription = symbol + "(" + (accumulator.description ?? "") + ")"
                         
-                        accumulator = (newValue, newDescription)
+                        accumulator = (newValue, newDescription, error)
                     }
                     
-                case .binaryOperation(let function):
+                case .binaryOperation(let (operation, validator)):
                     
                     performPendingBinaryOperation()
                     
-                    if accumulator.value != nil {
-                        pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator, symbol: symbol)
-                        accumulator = (nil, nil)
+                    if let value = accumulator.value {
+                        pendingBinaryOperation = PendingBinaryOperation(operation: operation, validator: validator, firstOperand: (value, accumulator.description!), symbol: symbol)
+                        accumulator = (nil, nil, nil)
                     }
                     
                 case .equals:
@@ -132,7 +151,7 @@ struct CalculatorBrain {
             switch(element) {
                 
             case .number(let value):
-                accumulator = (value, format(value))
+                accumulator = (value, format(value), nil)
                 
             case .operation(let symbol):
                 performOperation(symbol)
@@ -141,16 +160,16 @@ struct CalculatorBrain {
                 
                 if variables != nil {
                     let value = variables![variable] ?? 0
-                    accumulator = (value, variable)
+                    accumulator = (value, variable, nil)
                 } else {
-                    accumulator = (0, variable)
+                    accumulator = (0, variable, nil)
                 }
                 
             }
             
         }
         
-        let result = accumulator.value
+        let result = Result(value: accumulator.value, error: accumulator.error)
         let isPending = pendingBinaryOperation != nil
         
         var description = accumulator.description ?? ""

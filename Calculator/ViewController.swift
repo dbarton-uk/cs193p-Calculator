@@ -147,8 +147,8 @@ class ViewController: UIViewController {
         
         let (result, resultIsPending, description) = brain.evaluate(using: variables)
         
-        if result != nil {
-            display.text = format(result!)
+        if let value = result.value {
+            display.text = format(value)
         }
         
         let postfix = resultIsPending ? "..." : "="

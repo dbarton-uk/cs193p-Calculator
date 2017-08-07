@@ -9,7 +9,8 @@
 import Foundation
 
 struct PendingBinaryOperation {
-    let function: (Double, Double) -> Double
+    let operation: (Double, Double) -> Double
+    let validator: ((Double, Double) -> String?)?
     let firstOperand: (value: Double?, description: String?)
     let symbol: String
     
@@ -20,11 +21,12 @@ struct PendingBinaryOperation {
         }
     }
     
-    func perform(with secondOperand: (value: Double?, description: String?)) -> (Double?, String?) {
+    func perform(with secondOperand: (value: Double?, description: String?)) -> (Double?, String?, String?) {
         
-        let newValue = function(firstOperand.value!, secondOperand.value!)
+        let newValue = operation(firstOperand.value!, secondOperand.value!)
+        let error = validator != nil ? validator!(firstOperand.value!, secondOperand.value!) : nil
         let newDescription = self.description + (secondOperand.description ?? "")
         
-        return (newValue, newDescription)
+        return (newValue, newDescription, error)
     }
 }

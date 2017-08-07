@@ -34,6 +34,7 @@ class CalculatorTests: XCTestCase {
     var plusButton: UIButton!
     var multiplyButton: UIButton!
     var equalsButton: UIButton!
+
     
     var button: UIButton!
     
@@ -385,7 +386,7 @@ class CalculatorTests: XCTestCase {
         
         let (result, isPending, description) = brain.evaluate(using: variables)
         
-        XCTAssertEqual(result, 30.0, "result of x+y+z, where x = 10.0 and y = 20.0 and z is not set should be equal to 30.0")
+        XCTAssertEqual(result.value!, 30.0, "result of x+y+z, where x = 10.0 and y = 20.0 and z is not set should be equal to 30.0")
         XCTAssertEqual(isPending, false, "isPending should be false")
         XCTAssertEqual(description, "x+y+z", "description of x+y+z should be x+y+z")
     }
@@ -506,6 +507,40 @@ class CalculatorTests: XCTestCase {
         
     }
     
+    func testA2_e1a() {
+        
+        brain.setOperand(10)
+        brain.setOperation("÷")
+        brain.setOperand(2)
+        brain.setOperation("=")
+        
+        let (result, _, _) = brain.evaluate()
+        
+        XCTAssertEqual(result.error, nil, "10 divided by 2 should not generate an error")
+    }
+    
+    func testA2_e1b() {
+        
+        brain.setOperand(10)
+        brain.setOperation("±")
+        brain.setOperation("√")
+        
+        let (result, _, _) = brain.evaluate()
+        
+        XCTAssertEqual(result.error, "Cannot evaluate the square root of a negative number.", "No error message found: 'Cannot evaluate the square root of a negative number.'")
+    }
+    
+    func testA2_e1c() {
+        
+        brain.setOperand(10)
+        brain.setOperation("÷")
+        brain.setOperand(0)
+        brain.setOperation("=")
+        
+        let (result, _, _) = brain.evaluate()
+        
+        XCTAssertEqual(result.error, "Cannot evaluate a division where the divisor is 0.", "No error message found: 'Cannot evaluate a division where the divisor is 0.'")
+    }
     
     private func assertExpectedDisplayValue(for input: String, hasDisplayValue expectedDisplayValue: String! = nil, hasSequenceValue expectedSequenceValue: String! = nil, hasMemoryValue expectedMemoryValue: String! = nil) {
         
