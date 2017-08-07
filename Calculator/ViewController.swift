@@ -147,10 +147,14 @@ class ViewController: UIViewController {
         
         let (result, resultIsPending, description) = brain.evaluate(using: variables)
         
-        if let value = result.value {
-            display.text = format(value)
+        if let error = result.error {
+            display.text = error
+        } else{
+            if let value = result.value {
+                display.text = format(value)
+            }
         }
-        
+
         let postfix = resultIsPending ? "..." : "="
         
         sequence.text = description == "" ? " " : description + postfix
