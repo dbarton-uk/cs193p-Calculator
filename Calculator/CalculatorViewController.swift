@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     
     private static let MEMORY_KEY = "M"
     
@@ -29,10 +29,10 @@ class ViewController: UIViewController {
     
     var memoryValue: Double {
         get {
-            return variables[ViewController.MEMORY_KEY] ?? 0
+            return variables[CalculatorViewController.MEMORY_KEY] ?? 0
         }
         set {
-            variables.updateValue(newValue, forKey: ViewController.MEMORY_KEY)
+            variables.updateValue(newValue, forKey: CalculatorViewController.MEMORY_KEY)
             memory.text = "M=" + String(format(newValue))
         }
     }
@@ -119,7 +119,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchMButton(_ sender: UIButton) {
         
-        brain.setOperand(variable: ViewController.MEMORY_KEY)
+        brain.setOperand(variable: CalculatorViewController.MEMORY_KEY)
         evaluateAndSetDisplay();
         userIsInTheMiddleOfTyping = false
     }

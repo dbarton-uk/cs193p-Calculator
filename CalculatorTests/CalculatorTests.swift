@@ -12,7 +12,7 @@ import XCTest
 
 class CalculatorTests: XCTestCase {
     
-    var controller: ViewController!
+    var controller: CalculatorViewController!
     
     var zeroButton: UIButton!
     var oneButton: UIButton!
@@ -43,7 +43,7 @@ class CalculatorTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! ViewController!
+        controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! CalculatorViewController!
         _ = controller.view
         
         zeroButton = UIButton()

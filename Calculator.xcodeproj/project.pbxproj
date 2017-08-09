@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F31EFEE1F38D7BC0088A0C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F31EFED1F38D7BC0088A0C5 /* LaunchScreen.storyboard */; };
 		0F45E59E1F0D0A9100279F55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45E59D1F0D0A9100279F55 /* AppDelegate.swift */; };
-		0F45E5A01F0D0A9100279F55 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45E59F1F0D0A9100279F55 /* ViewController.swift */; };
+		0F45E5A01F0D0A9100279F55 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45E59F1F0D0A9100279F55 /* CalculatorViewController.swift */; };
 		0F45E5A31F0D0A9100279F55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F45E5A11F0D0A9100279F55 /* Main.storyboard */; };
 		0F45E5A51F0D0A9100279F55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F45E5A41F0D0A9100279F55 /* Assets.xcassets */; };
 		0F45E5A81F0D0A9100279F55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F45E5A61F0D0A9100279F55 /* LaunchScreen.storyboard */; };
@@ -39,7 +39,7 @@
 		0F31EFED1F38D7BC0088A0C5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F45E59A1F0D0A9100279F55 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F45E59D1F0D0A9100279F55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0F45E59F1F0D0A9100279F55 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0F45E59F1F0D0A9100279F55 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		0F45E5A21F0D0A9100279F55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F45E5A41F0D0A9100279F55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F45E5A71F0D0A9100279F55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				0F45E5AF1F0D0B7500279F55 /* Supporting Files */,
-				0F45E59F1F0D0A9100279F55 /* ViewController.swift */,
+				0F45E59F1F0D0A9100279F55 /* CalculatorViewController.swift */,
 				0F45E5A11F0D0A9100279F55 /* Main.storyboard */,
 				0F62CECB1F0E3F570042BF5B /* CalculatorBrain.swift */,
 				0F756E4F1F3470660017F33B /* PendingBinaryOperation.swift */,
@@ -268,7 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F62CECC1F0E3F570042BF5B /* CalculatorBrain.swift in Sources */,
-				0F45E5A01F0D0A9100279F55 /* ViewController.swift in Sources */,
+				0F45E5A01F0D0A9100279F55 /* CalculatorViewController.swift in Sources */,
 				0F756E501F3470660017F33B /* PendingBinaryOperation.swift in Sources */,
 				0F45E59E1F0D0A9100279F55 /* AppDelegate.swift in Sources */,
 			);
