@@ -43,7 +43,7 @@ class CalculatorTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! CalculatorViewController!
+        controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CalculatorViewController") as! CalculatorViewController
         _ = controller.view
         
         zeroButton = UIButton()
