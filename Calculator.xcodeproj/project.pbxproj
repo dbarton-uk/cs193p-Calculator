@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F00816F1F3DC0FC004DF5A9 /* AxesDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F00816E1F3DC0FC004DF5A9 /* AxesDrawer.swift */; };
 		0F31EFEE1F38D7BC0088A0C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F31EFED1F38D7BC0088A0C5 /* LaunchScreen.storyboard */; };
 		0F45E59E1F0D0A9100279F55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45E59D1F0D0A9100279F55 /* AppDelegate.swift */; };
 		0F45E5A01F0D0A9100279F55 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F45E59F1F0D0A9100279F55 /* CalculatorViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F00816E1F3DC0FC004DF5A9 /* AxesDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AxesDrawer.swift; path = ../../../Downloads/AxesDrawer.swift; sourceTree = "<group>"; };
 		0F31EFED1F38D7BC0088A0C5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F45E59A1F0D0A9100279F55 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F45E59D1F0D0A9100279F55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				0F45E5AF1F0D0B7500279F55 /* Supporting Files */,
 				0F45E59F1F0D0A9100279F55 /* CalculatorViewController.swift */,
 				0F45E5A11F0D0A9100279F55 /* Main.storyboard */,
+				0F00816E1F3DC0FC004DF5A9 /* AxesDrawer.swift */,
 				0F62CECB1F0E3F570042BF5B /* CalculatorBrain.swift */,
 				0F756E4F1F3470660017F33B /* PendingBinaryOperation.swift */,
 				0F31EFED1F38D7BC0088A0C5 /* LaunchScreen.storyboard */,
@@ -269,6 +272,7 @@
 			files = (
 				0F62CECC1F0E3F570042BF5B /* CalculatorBrain.swift in Sources */,
 				0F45E5A01F0D0A9100279F55 /* CalculatorViewController.swift in Sources */,
+				0F00816F1F3DC0FC004DF5A9 /* AxesDrawer.swift in Sources */,
 				0F756E501F3470660017F33B /* PendingBinaryOperation.swift in Sources */,
 				0F45E59E1F0D0A9100279F55 /* AppDelegate.swift in Sources */,
 			);
