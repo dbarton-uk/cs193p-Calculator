@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Jps-9C-aTW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -420,7 +420,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-369" y="-354"/>
+            <point key="canvasLocation" x="-750" y="-354"/>
+        </scene>
+        <!--Graph View Controller-->
+        <scene sceneID="B4m-eb-prb">
+            <objects>
+                <viewController id="Jps-9C-aTW" customClass="GraphViewController" customModule="Calculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="491-MH-IsG"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ju8-Ld-pji"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="odk-8y-lWy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Xy5-Zq-td9" customClass="GraphView" customModule="Calculator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Xy5-Zq-td9" firstAttribute="bottom" secondItem="Ju8-Ld-pji" secondAttribute="top" id="IeN-uy-4CL"/>
+                            <constraint firstAttribute="trailing" secondItem="Xy5-Zq-td9" secondAttribute="trailing" id="THU-ge-Wto"/>
+                            <constraint firstItem="Xy5-Zq-td9" firstAttribute="leading" secondItem="odk-8y-lWy" secondAttribute="leading" id="tVm-RY-TjC"/>
+                            <constraint firstItem="Xy5-Zq-td9" firstAttribute="top" secondItem="491-MH-IsG" secondAttribute="bottom" constant="8" symbolic="YES" id="vHa-63-Dre"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QCV-lX-6hl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="252" y="-355.7721139430285"/>
         </scene>
     </scenes>
 </document>
