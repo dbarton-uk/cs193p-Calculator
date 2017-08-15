@@ -15,7 +15,7 @@ class GraphView: UIView {
     var fx: (Double) -> Double = cos
     
     @IBInspectable
-    var pointsPerUnit: CGFloat = 20
+    var pointsPerUnit: CGFloat = 50
     
     @IBInspectable
     var colour: UIColor = UIColor.red
@@ -28,17 +28,13 @@ class GraphView: UIView {
         return scaleToPixel(fromPoint: origin)
     }
     
-    private func scaleToPixels(fromPoints: CGFloat) -> CGFloat {
-        return fromPoints * contentScaleFactor
+    private func scalePointsToPixels(_ value: CGFloat) -> CGFloat {
+        return value * contentScaleFactor
     }
     
     private func scaleToPixel(fromPoint: CGPoint) -> CGPoint {
-        return CGPoint(x: scaleToPixels(fromPoints: fromPoint.x), y: scaleToPixels(fromPoints: fromPoint.y))
+        return CGPoint(x: scalePointsToPixels(fromPoint.x), y: scalePointsToPixels(fromPoint.y))
         
-    }
-    
-    private func drawAxes() {
-
     }
     
     private func pathForFunction(in rect: CGRect) -> UIBezierPath {
@@ -48,14 +44,14 @@ class GraphView: UIView {
         }
         
         func convertToPixelY(forUnit y: CGFloat) -> CGFloat {
-            return (y * pointsPerUnit * -1) + originInPixels.y
+            return (y * pointsPerUnit * contentScaleFactor * -1) + originInPixels.y
         }
         
         func calculatePixelY(forPixel x: CGFloat) -> CGFloat {
             
             let ux = convertToUnitX(forPixel: x)
             let uy = CGFloat(fx(Double(ux)))
-            
+        
             return convertToPixelY(forUnit: uy)
         }
         
@@ -72,7 +68,7 @@ class GraphView: UIView {
             return CGPoint(x: scaleToPoint(pixel.x), y: scaleToPoint(pixel.y))
         }
         
-        let widthInPixels = scaleToPixels(fromPoints: rect.width)
+        let widthInPixels = scalePointsToPixels(rect.width)
         let path = UIBezierPath()
         
         path.move(to: calculatePoint(forPixel: 0))
