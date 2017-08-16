@@ -15,7 +15,11 @@ class GraphView: UIView {
     var fx: (Double) -> Double = cos
     
     @IBInspectable
-    var pointsPerUnit: CGFloat = 50
+    var scale: CGFloat = 50
+    
+    private var pixelScale: CGFloat {
+        return scale * contentScaleFactor
+    }
     
     @IBInspectable
     var colour: UIColor = UIColor.red
@@ -40,18 +44,18 @@ class GraphView: UIView {
     private func pathForFunction(in rect: CGRect) -> UIBezierPath {
         
         func convertToUnitX(forPixel x: CGFloat) -> CGFloat {
-            return (x - originInPixels.x) / (pointsPerUnit * contentScaleFactor)
+            return (x - originInPixels.x) / pixelScale
         }
         
         func convertToPixelY(forUnit y: CGFloat) -> CGFloat {
-            return (y * pointsPerUnit * contentScaleFactor * -1) + originInPixels.y
+            return (y * pixelScale * -1) + originInPixels.y
         }
         
         func calculatePixelY(forPixel x: CGFloat) -> CGFloat {
             
             let ux = convertToUnitX(forPixel: x)
             let uy = CGFloat(fx(Double(ux)))
-        
+            
             return convertToPixelY(forUnit: uy)
         }
         
@@ -82,11 +86,12 @@ class GraphView: UIView {
     
     
     override func draw(_ rect: CGRect) {
-
-        AxesDrawer(contentScaleFactor: self.contentScaleFactor).drawAxes(in: bounds, origin: origin, pointsPerUnit: pointsPerUnit)
+        
+        AxesDrawer(contentScaleFactor: self.contentScaleFactor).drawAxes(in: bounds, origin: origin, pointsPerUnit: scale)
+        
         colour.set()
         pathForFunction(in: rect).stroke();
-
+        
     }
-
+    
 }
