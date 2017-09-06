@@ -190,9 +190,17 @@ class CalculatorViewController: UIViewController {
         switch segue.identifier! {
             
         case "Show Graph":
+            
+            let result = brain.evaluate()
+            
+            var destinationViewController = segue.destination
 
-            let graphController = segue.destination as! GraphViewController
+            if let navigationViewController = destinationViewController as? UINavigationController {
+                destinationViewController = navigationViewController.visibleViewController ?? destinationViewController
+            }
+            let graphController = destinationViewController as! GraphViewController
             graphController.evaluator = evaluator
+            graphController.navigationItem.title = result.description
             
         default:
             break
