@@ -18,7 +18,6 @@ func divisionValidator(divider: Double, divisor: Double) -> String? {
 }
 
 
-
 struct CalculatorBrain {
     
     @available(*, deprecated)

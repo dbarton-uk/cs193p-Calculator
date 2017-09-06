@@ -54,7 +54,7 @@ class CalculatorViewController: UIViewController {
             userIsInTheMiddleOfTyping = true
         }
     }
-   
+    
     @IBAction func touchPoint(_ sender: UIButton) {
         
         if (!userIsInTheMiddleOfTyping) {
@@ -62,11 +62,11 @@ class CalculatorViewController: UIViewController {
             userIsInTheMiddleOfTyping = true
         }
         
-       
+        
         if !display.text!.contains(".") {
             display.text! += "."
         }
-
+        
     }
     
     @IBAction func touchClear(_ sender: UIButton) {
@@ -107,7 +107,7 @@ class CalculatorViewController: UIViewController {
     @IBAction func touchRandom(_ sender: UIButton) {
         displayValue = Double(arc4random()) / Double(UInt32.max)
         setBrainOperand()
-
+        
     }
     
     @IBAction func touchSetMButton(_ sender: UIButton) {
@@ -135,7 +135,7 @@ class CalculatorViewController: UIViewController {
         }
         
         evaluateAndSetDisplay()
-
+        
     }
     
     private func setBrainOperand() {
@@ -154,7 +154,7 @@ class CalculatorViewController: UIViewController {
                 display.text = format(value)
             }
         }
-
+        
         let postfix = resultIsPending ? "..." : "="
         
         sequence.text = description == "" ? " " : description + postfix
@@ -166,6 +166,39 @@ class CalculatorViewController: UIViewController {
         formatter.maximumFractionDigits = 6
         return formatter.string(from: (double as NSNumber))!
     }
+    
+    private func evaluator(val: Double) -> Double {
+        
+        let result = brain.evaluate(using: ["M":val]).result
+        return result.value ?? 0
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        switch identifier {
+            
+        case "Show Graph":
+            return !brain.evaluate().isPending
+            
+        default:
+            return true
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        switch segue.identifier! {
+            
+        case "Show Graph":
 
+            let graphController = segue.destination as! GraphViewController
+            graphController.evaluator = evaluator
+            
+        default:
+            break
+            
+        }
+    }
+    
 }
 
